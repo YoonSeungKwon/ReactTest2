@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { ACCESS_TOKEN } from "../Constant/apiConstant";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) =>{
+
+    const navigate = useNavigate();
 
     const [state, setState] = useState(
         {
@@ -21,21 +24,19 @@ const Login = (props) =>{
     }
 
     const handleSubmit = () =>{
-        axios.post("/api/member/login", {
+        axios.post("/api/member/login", state,{
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body:{
-                'email':state.email,
-                'password':state.password
             }
         }).then(function(response){
             console.log(response)
             if(response.status === 200){
                 localStorage.setItem(ACCESS_TOKEN,response.headers.get("Authorization"));
+                navigate("/")
             }
             else{
                 console.log("Error");
+                alert(response.data.message)
             }
         }).catch(function(error){
             console.log(error);

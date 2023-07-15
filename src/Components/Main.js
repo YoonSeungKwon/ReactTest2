@@ -12,7 +12,7 @@ const Main = () =>{
             <br/>
             <Link to="/register">to Register Page</Link>
             <br/>
-            <Link to="/test">Test Page</Link>
+            <Link to="/test">Auth Test Page</Link>
         </>
     )
 
